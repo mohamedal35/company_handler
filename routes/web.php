@@ -99,6 +99,28 @@ Route::get('/products', function (Request $request) {
         ]
     );
 })->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/product', function (Request $request) {
+
+    $section = new Section;
+    $product = new Product;
+    $contact = new Contact;
+    $num_sections = ($section->get_total_sections()->stats);
+    $num_products = ($product->get_total_products()->stats);
+    $num_contacts = ($contact->number_contacts()->stats);
+
+    $sections = $product->where('id', $request->id)->first();
+
+
+    return view(
+        'product',
+        [
+            'num_sections' => $num_sections,
+            'num_products' => $num_products,
+            'num_contacts' => $num_contacts,
+            'section' => $sections
+        ]
+    );
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/section', function (Request $request) {
 
