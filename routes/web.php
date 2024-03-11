@@ -3,6 +3,7 @@
 use App\Http\Controllers\Sections;
 use App\Models\Contact;
 use App\Models\Product;
+use App\Models\ProductCategory;
 use App\Models\Section;
 use Illuminate\Http\Request;
 // use Illuminate\Http\Client\Request;
@@ -61,11 +62,35 @@ Route::get('/sections', function (Request $request) {
     $num_products = ($product->get_total_products()->stats);
     $num_contacts = ($contact->number_contacts()->stats);
 
-    $sections   = $section->get_all_sections();
+    $sections = $section->get_all_sections();
 
 
     return view(
         'sections',
+        [
+            'num_sections' => $num_sections,
+            'num_products' => $num_products,
+            'num_contacts' => $num_contacts,
+            'sections' => $sections
+        ]
+    );
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+
+Route::get('/products', function (Request $request) {
+
+    $section = new Section;
+    $product = new Product;
+    $contact = new Contact;
+    $num_sections = ($section->get_total_sections()->stats);
+    $num_products = ($product->get_total_products()->stats);
+    $num_contacts = ($contact->number_contacts()->stats);
+
+    $sections = $product->get_products();
+
+
+    return view(
+        'products',
         [
             'num_sections' => $num_sections,
             'num_products' => $num_products,
@@ -84,7 +109,7 @@ Route::get('/section', function (Request $request) {
     $num_products = ($product->get_total_products()->stats);
     $num_contacts = ($contact->number_contacts()->stats);
 
-    $section   = $section->get_section($request->id);
+    $section = $section->get_section($request->id);
     return view(
         'section',
         [
@@ -105,9 +130,45 @@ Route::get('/new-product', function (Request $request) {
     $num_products = ($product->get_total_products()->stats);
     $num_contacts = ($contact->number_contacts()->stats);
 
-    $section   = $section->get_section($request->id);
+    $section = $section->get_section($request->id);
     return view(
-        'section',
+        'newproduct',
+        [
+            'num_sections' => $num_sections,
+            'num_products' => $num_products,
+            'num_contacts' => $num_contacts,
+            'section' => $section
+        ]
+    );
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::post('/new-product', function (Request $request) {
+
+    $section = new Section;
+    $product = new Product;
+    $contact = new Contact;
+    $num_sections = ($section->get_total_sections()->stats);
+    $num_products = ($product->get_total_products()->stats);
+    $num_contacts = ($contact->number_contacts()->stats);
+
+    $section = $section->get_section($request->id);
+    $photo = $request->file('image');
+    $path = $photo->storeAs('uploads', $photo->getClientOriginalName(), 'public'); // Assuming 'uploads' is the desired directory within 'public'
+
+    $product->header = $request->title;
+    $product->body = $request->body;
+    $product->link = $request->link;
+    $product->img = $photo->getClientOriginalName();
+    $product->price = $request->price;
+    $product->save();
+    foreach (explode(',', $request->cats) as $cat) {
+        $product_cat = new ProductCategory;
+        $product_cat->product_id = $product->id;
+        $product_cat->category_id = $cat;
+        $product_cat->save();
+    }
+    return view(
+        'newproduct',
         [
             'num_sections' => $num_sections,
             'num_products' => $num_products,
@@ -126,8 +187,8 @@ Route::post('/section', function (Request $request) {
     $num_products = ($product->get_total_products()->stats);
     $num_contacts = ($contact->number_contacts()->stats);
 
-    $section   = $section->get_section($request->id);
-    
+    $section = $section->get_section($request->id);
+
     $section->order = $request->order;
     $section->placeholders = implode(',', $request->placeholders);
     $section->page = $request->page;

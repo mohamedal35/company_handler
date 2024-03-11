@@ -1,6 +1,4 @@
 <x-adminlay>
-
-    <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-dark">
         <!-- Left navbar links -->
         <ul class="navbar-nav">
@@ -160,7 +158,7 @@
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                     data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
+           with font-awesome or any other icon font library -->
                     <li class="nav-item">
                         <a href="/sections" class="nav-link">
                             <i class="nav-icon fas fa-th"></i>
@@ -169,6 +167,7 @@
                             </p>
                         </a>
                     </li>
+
                     <li class="nav-item">
                         <a href="/products" class="nav-link">
                             <i class="nav-icon fas fa-th"></i>
@@ -193,223 +192,107 @@
         <!-- /.sidebar -->
     </aside>
 
-    <!-- Content Wrapper. Contains page content -->
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Project Edit</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Project Edit</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
     <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
+
         <div class="content-header">
             <div class="container-fluid">
+
                 <div class="row mb-2">
                     <div class="col-sm-6">
                         <h1 class="m-0">Dashboard</h1>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
+
             </div><!-- /.container-fluid -->
         </div>
-        <!-- /.content-header -->
-
         <!-- Main content -->
         <section class="content">
-            <div class="container-fluid">
-                <!-- Info boxes -->
-                <div class="row">
-                    <div class="col-12 col-sm-6 col-md-4">
-                        <div class="info-box">
-                            <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
+            <div class="row">
+                <form method="post" style="width:100%" id="sectionForm" enctype="multipart/form-data">
 
-                            <div class="info-box-content">
-                                <span class="info-box-text">Total Sections</span>
-                                <span class="info-box-number">
-                                    {{ $num_sections }}
-                                </span>
-                            </div>
-                            <!-- /.info-box-content -->
-                        </div>
-                        <!-- /.info-box -->
-                    </div>
-                    <!-- /.col -->
-                    <!-- /.col -->
-
-                    <!-- fix for small devices only -->
-                    <div class="clearfix hidden-md-up"></div>
-
-                    <div class="col-12 col-sm-6 col-md-4">
-                        <div class="info-box mb-3">
-                            <span class="info-box-icon bg-success elevation-1"><i
-                                    class="fas fa-shopping-cart"></i></span>
-
-                            <div class="info-box-content">
-                                <span class="info-box-text">Sales</span>
-                                <span class="info-box-number">{{ $num_products }}</span>
-                            </div>
-                            <!-- /.info-box-content -->
-                        </div>
-                        <!-- /.info-box -->
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-12 col-sm-6 col-md-4">
-                        <div class="info-box mb-3">
-                            <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
-
-                            <div class="info-box-content">
-                                <span class="info-box-text">New Contacts</span>
-                                <span class="info-box-number">{{ $num_contacts }}</span>
-                            </div>
-                            <!-- /.info-box-content -->
-                        </div>
-                        <!-- /.info-box -->
-                    </div>
-                    <!-- /.col -->
-                </div>
-                <!-- /.row -->
-
-                <!-- /.row -->
-
-                <!-- Main row -->
-                <div class="row">
-                    <!-- Left col -->
-                    <div class="col-md-8">
-
-                        <!-- /.card -->
-                        <div class="row">
-                            <!-- /.col -->
-
-
-                            <!-- /.col -->
-                        </div>
-                        <!-- /.row -->
-
-                        <!-- TABLE: LATEST ORDERS -->
-                        <div class="card">
-                            <div class="card-header border-transparent">
-                                <h3 class="card-title">Latest Contacts</h3>
-
-                                <div class="card-tools">
-                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                        <i class="fas fa-minus"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-tool" data-card-widget="remove">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <!-- /.card-header -->
-                            <div class="card-body p-0">
-                                <div class="table-responsive">
-                                    <table class="table m-0">
-                                        <thead>
-                                            <tr>
-                                                <th>Order ID</th>
-                                                <th>Name</th>
-                                                <th>Email</th>
-                                                <th>Number</th>
-                                                <th>Subject</th>
-                                                <th>Message</th>
-                                                <th>At</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($latest_contacts as $contact)
-                                                <tr>
-                                                    <td><a href="pages/examples/invoice.html">{{ $contact->id }}</a>
-                                                    </td>
-                                                    <td>{{ $contact->name }}</td>
-                                                    <td><span class="badge badge-success">{{ $contact->email }}</span>
-                                                    </td>
-                                                    <td>
-                                                        <div class="sparkbar" data-color="#00a65a" data-height="20">
-                                                            {{ $contact->number }}</div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="sparkbar" data-color="#00a65a" data-height="20">
-                                                            {{ $contact->subject }}</div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="sparkbar" data-color="#00a65a" data-height="20">
-                                                            {{ $contact->message }}</div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="sparkbar" data-color="#00a65a" data-height="20">
-                                                            {{ $contact->created_at }}</div>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <!-- /.table-responsive -->
-                            </div>
-                            <!-- /.card-body -->
-                            <div class="card-footer clearfix">
-                                <a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">View All
-                                    Orders</a>
-                            </div>
-                            <!-- /.card-footer -->
-                        </div>
-                        <!-- /.card -->
-                    </div>
-                    <!-- /.col -->
-
-                    <div class="col-md-4">
-
-                        <!-- /.info-box -->
-                        <!-- /.card -->
-
-                        <!-- PRODUCT LIST -->
-                        <div class="card">
+                    <div class="col-md-12">
+                        <div class="card card-primary">
                             <div class="card-header">
-                                <h3 class="card-title">Recently Added Products</h3>
+                                <h3 class="card-title">General</h3>
 
                                 <div class="card-tools">
-                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse"
+                                        title="Collapse">
                                         <i class="fas fa-minus"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-tool" data-card-widget="remove">
-                                        <i class="fas fa-times"></i>
                                     </button>
                                 </div>
                             </div>
-                            <!-- /.card-header -->
-                            <div class="card-body p-0">
-                                <ul class="products-list product-list-in-card pl-2 pr-2">
-                                    @foreach ($latest_products as $item)
-                                        <li class="item">
-                                            <div class="product-img">
-                                                <img src="storage/uploads/{{$item->img}}" alt="Product Image"
-                                                    class="img-size-50">
-                                            </div>
-                                            <div class="product-info">
-                                                <a href="javascript:void(0)" class="product-title">{{$item->header}}
-                                                    <span class="badge badge-warning float-right">{{$item->price}}$</span></a>
-                                                <span class="product-description">
-                                                    {{$item->body}}
-                                                </span>
-                                            </div>
-                                        </li>
-                                    @endforeach
-                                    <!-- /.item -->
-                                </ul>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="inputName">Title</label>
+                                    <input type="text" id="inputName" class="form-control" name="title">
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="inputClientCompany">Body</label>
+                                    <input type="text" id="inputClientCompany" class="form-control"
+                                        name="body">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="inputClientCompany">Price</label>
+                                    <input type="number" id="inputClientCompany" class="form-control"
+                                        name="price">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="inputClientCompany">Link</label>
+                                    <input type="text" id="inputClientCompany" class="form-control"
+                                        name="link">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="inputClientCompany">Categories</label>
+                                    <input type="text" id="inputClientCompany" class="form-control"
+                                        name="cats">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="inputProjectLeader">Images</label>
+                                    <input type="file" id="inputProjectLeader" class="form-control"
+                                        name="image">
+                                </div>
                             </div>
                             <!-- /.card-body -->
-                            <div class="card-footer text-center">
-                                <a href="javascript:void(0)" class="uppercase">View All Products</a>
-                            </div>
-                            <!-- /.card-footer -->
                         </div>
                         <!-- /.card -->
                     </div>
-                    <!-- /.col -->
+                </form>
+
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <a href="#" class="btn btn-secondary">Cancel</a>
+                    <input type="submit" form="sectionForm" value="Save Changes"
+                        class="btn btn-success float-right">
                 </div>
-                <!-- /.row -->
-            </div><!--/. container-fluid -->
+            </div>
         </section>
-        <!-- /.content -->
     </div>
-    <!-- /.content-wrapper -->
 
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-        <!-- Control sidebar content goes here -->
-    </aside>
-    <!-- /.control-sidebar -->
 
+
+    <!-- /.content -->
 </x-adminlay>

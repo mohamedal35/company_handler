@@ -170,16 +170,9 @@
                         </a>
                     </li>
 
+
                     <li class="nav-item">
-                        <a href="/sections" class="nav-link">
-                            <i class="nav-icon fas fa-th"></i>
-                            <p>
-                                Contacts
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/sections" class="nav-link">
+                        <a href="/products" class="nav-link">
                             <i class="nav-icon fas fa-th"></i>
                             <p>
                                 Products
@@ -187,14 +180,13 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="/sections" class="nav-link">
+                        <a href="/new-product" class="nav-link">
                             <i class="nav-icon fas fa-th"></i>
                             <p>
                                 New product
                             </p>
                         </a>
                     </li>
-
                 </ul>
             </nav>
             <!-- /.sidebar-menu -->
