@@ -192,6 +192,46 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="/marketers" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            marketers 
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/new-marketer" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            New marketer
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/marketers" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Partners Sections 
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/new-marketer" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            New partners Section
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/contact-info" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Contact Information
+                        </p>
+                    </a>
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

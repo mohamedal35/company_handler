@@ -110,16 +110,18 @@
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
-                                                <th>Name</th>
+                                                <th>Key</th>
+                                                <th>Value</th>
 
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach ($sections as $section)
                                                 <tr>
-                                                    <td><a href="/category?id={{ $section->id }}">{{ $section->id }}</a>
+                                                    <td><a href="/information?id={{ $section->id }}">{{ $section->id }}</a>
                                                     </td>
-                                                    <td>{{ $section->name }}</td>
+                                                    <td>{{ $section->key }}</td>
+                                                    <td>{{ $section->value }}</td>
                                                     </td>
                                                 </tr>
                                             @endforeach

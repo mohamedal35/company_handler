@@ -1,13 +1,15 @@
 <?php
 
-use App\Http\Controllers\Sections;
-use App\Models\Category;
+use App\Models\Info;
 use App\Models\Contact;
 use App\Models\Product;
-use App\Models\ProductCategory;
 use App\Models\Section;
+use App\Models\Category;
+use App\Models\Marketer;
 use Illuminate\Http\Request;
+use App\Models\ProductCategory;
 // use Illuminate\Http\Client\Request;
+use App\Http\Controllers\Sections;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 
@@ -53,6 +55,211 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
+Route::get('/dashboard', function () {
+
+    $section = new Section;
+    $product = new Product;
+    $contact = new Contact;
+    $num_sections = ($section->get_total_sections()->stats);
+    $num_products = ($product->get_total_products()->stats);
+    $num_contacts = ($contact->number_contacts()->stats);
+    $latest_contacts = $contact->latest_contacts();
+    $latest_products = $product->latest_products();
+    return view(
+        'dashboard',
+        [
+            'num_sections' => $num_sections,
+            'num_products' => $num_products,
+            'num_contacts' => $num_contacts,
+            'latest_contacts' => $latest_contacts,
+            'latest_products' => $latest_products
+        ]
+    );
+})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/marketers', function () {
+
+    $section = new Section;
+    $product = new Product;
+    $contact = new Contact;
+    $marketers = new Marketer;
+    $num_sections = ($section->get_total_sections()->stats);
+    $num_products = ($product->get_total_products()->stats);
+    $num_contacts = ($contact->number_contacts()->stats);
+    return view(
+        'marketers',
+        [
+            'num_sections' => $num_sections,
+            'num_products' => $num_products,
+            'num_contacts' => $num_contacts,
+            'marketers'    =>$marketers->get_marketers()
+        ]
+    );
+})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/contact-info', function () {
+
+    $section = new Section;
+    $product = new Product;
+    $contact = new Contact;
+    $marketers = new Marketer;
+    $num_sections = ($section->get_total_sections()->stats);
+    $num_products = ($product->get_total_products()->stats);
+    $num_contacts = ($contact->number_contacts()->stats);
+    $info = new Info;
+
+    return view(
+        'informations',
+        [
+            'num_sections' => $num_sections,
+            'num_products' => $num_products,
+            'num_contacts' => $num_contacts,
+            'sections'    =>$info->get_all_info()
+        ]
+    );
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/information', function (Request $request) {
+
+    $section = new Section;
+    $product = new Product;
+    $contact = new Contact;
+    $marketers = new Marketer;
+    $num_sections = ($section->get_total_sections()->stats);
+    $num_products = ($product->get_total_products()->stats);
+    $num_contacts = ($contact->number_contacts()->stats);
+    $info = new Info;
+
+    return view(
+        'information',
+        [
+            'num_sections' => $num_sections,
+            'num_products' => $num_products,
+            'num_contacts' => $num_contacts,
+            'section'    =>$info::where('id', $request->id)->first()
+        ]
+    );
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::post('/information', function (Request $request) {
+
+    $section = new Section;
+    $product = new Product;
+    $contact = new Contact;
+    $marketers = new Marketer;
+    $num_sections = ($section->get_total_sections()->stats);
+    $num_products = ($product->get_total_products()->stats);
+    $num_contacts = ($contact->number_contacts()->stats);
+    $info = new Info;
+    $info2 =$info::where('id', $request->id)->first();
+    $info2->value = $request->value;
+    $info2->update();
+    return view(
+        'information',
+        [
+            'num_sections' => $num_sections,
+            'num_products' => $num_products,
+            'num_contacts' => $num_contacts,
+            'section'    => $info2
+        ]
+    );
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+
+Route::get('/new-marketer', function () {
+
+    $section = new Section;
+    $product = new Product;
+    $contact = new Contact;
+    $marketers = new Marketer;
+    $num_sections = ($section->get_total_sections()->stats);
+    $num_products = ($product->get_total_products()->stats);
+    $num_contacts = ($contact->number_contacts()->stats);
+    return view(
+        'newmarketer',
+        [
+            'num_sections' => $num_sections,
+            'num_products' => $num_products,
+            'num_contacts' => $num_contacts,
+            'marketers'    =>$marketers->get_marketers()
+        ]
+    );
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::post('/new-marketer', function (Request $request) {
+
+    $section = new Section;
+    $product = new Product;
+    $contact = new Contact;
+    $marketers = new Marketer;
+    $num_sections = ($section->get_total_sections()->stats);
+    $num_products = ($product->get_total_products()->stats);
+    $num_contacts = ($contact->number_contacts()->stats);
+    $marketers->for = $request->for;
+    $marketers->name = $request->name;
+    $marketers->email = $request->email;
+    $marketers->phone = $request->phone;
+    $marketers->loc = $request->location;
+    $marketers->save();
+    return view(
+        'newmarketer',
+        [
+            'num_sections' => $num_sections,
+            'num_products' => $num_products,
+            'num_contacts' => $num_contacts,
+            'marketers'    =>$marketers->get_marketers()
+        ]
+    );
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/marketer', function (Request $request) {
+
+    $section = new Section;
+    $product = new Product;
+    $contact = new Contact;
+    $marketers = new Marketer;
+    $num_sections = ($section->get_total_sections()->stats);
+    $num_products = ($product->get_total_products()->stats);
+    $num_contacts = ($contact->number_contacts()->stats);
+    $marketer = $marketers::where('id', $request->id)->first();
+
+    return view(
+        'marketer',
+        [
+            'num_sections' => $num_sections,
+            'num_products' => $num_products,
+            'num_contacts' => $num_contacts,
+            'section'    =>$marketer
+        ]
+    );
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::post('/marketer', function (Request $request) {
+
+    $section = new Section;
+    $product = new Product;
+    $contact = new Contact;
+    $marketers = new Marketer;
+    $num_sections = ($section->get_total_sections()->stats);
+    $num_products = ($product->get_total_products()->stats);
+    $num_contacts = ($contact->number_contacts()->stats);
+    $marketer = $marketers::where('id', $request->id)->first();
+
+
+    $marketer->for = $request->for;
+    $marketer->name = $request->name;
+    $marketer->email = $request->email;
+    $marketer->phone = $request->phone;
+    $marketer->loc = $request->location;
+    $marketer->update();
+    return view(
+        'marketer',
+        [
+            'num_sections' => $num_sections,
+            'num_products' => $num_products,
+            'num_contacts' => $num_contacts,
+            'section'    =>$marketer
+        ]
+    );
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 
 Route::get('/sections', function (Request $request) {

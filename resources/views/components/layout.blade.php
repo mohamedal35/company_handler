@@ -22,7 +22,7 @@ $info = $info->get_all_info();
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="csrf-token" content="t2hyiEeY6IeekS1GE2chIXNaRiKR6Y0UZs8r7LlE" />
     <meta name="facebook-domain-verification" content="e9bf4vmexojv2k36znfxp5ce39lqj3" />
-    <title>حودا ديزين</title>
+    <title>ياسيلكو</title>
     <link rel="icon" type="image/png" href="{{asset('7odaa-com/assets/images/fav.svg')}}">
     <link rel="stylesheet" href="{{asset('7odaa-com/assets/css/bootstrap.rtl.min.css')}}">
     <link rel="stylesheet" href="{{asset('7odaa-com/assets/css/animate.min.css')}}">
@@ -173,18 +173,46 @@ $info = $info->get_all_info();
                     </div>
                     <div class="sidebar-content">
                         <h3> نبذة مختصرة </h3>
-                        <p>مؤسسة حودا ديزين لخدمات تصميم و تطوير المواقع و تطبيقات الهواتف العاملة بنظامى التشغيل
+                        <p>مؤسسة ياسيلكو لخدمات تصميم و تطوير المواقع و تطبيقات الهواتف العاملة بنظامى التشغيل
                             الاندرويد وال ios تقدم المؤسسة حلول الويب المتكاملة لجميع المؤسسات فى العالم و لديها قاعدة
                             عملاء ضخمة فى جميع دول العالم </p>
                     </div>
                     <div class="sidebar-contact-info">
                         <h3>معلومات للتواصل </h3>
                         <ul class="info-list">
-                            <li><i class="ri-phone-fill"></i> <a href="tel:00201111202057">00201111202057</a></li>
-                            <li><i class="ri-phone-fill"></i> <a href="tel:00966566366464">00966566366464</a></li>
+                            <li><i class="ri-phone-fill"></i> <a href="tel:@foreach ($info as $item)
+                                @php
+                                    if ($item->key == 'phone_1') echo $item->value;
+                                @endphp
+                            @endforeach">@foreach ($info as $item)
+                                @php
+                                    if ($item->key == 'phone_1') echo $item->value;
+                                @endphp
+                            @endforeach</a></li>
+                            <li><i class="ri-phone-fill"></i> <a href="tel:@foreach ($info as $item)
+                                @php
+                                    if ($item->key == 'phone_2') echo $item->value;
+                                @endphp
+                            @endforeach">@foreach ($info as $item)
+                                @php
+                                    if ($item->key == 'phone_2') echo $item->value;
+                                @endphp
+                            @endforeach</a></li>
                             <li><i class="ri-mail-line"></i> <a
-                                    href="mailto:info@7odaa.com"><span>info@7odaa.com</span></a></li>
-                            <li><i class="ri-map-pin-line"></i> جمهورية مصر العربيه - المملكه العربية السعودية </li>
+                                    href="mailto:@foreach ($info as $item)
+                                    @php
+                                        if ($item->key == 'email') echo $item->value;
+                                    @endphp
+                                @endforeach"><span>@foreach ($info as $item)
+                                        @php
+                                            if ($item->key == 'email') echo $item->value;
+                                        @endphp
+                                    @endforeach</span></a></li>
+                            <li><i class="ri-map-pin-line"></i> @foreach ($info as $item)
+                                @php
+                                    if ($item->key == 'location') echo $item->value;
+                                @endphp
+                            @endforeach </li>
                         </ul>
                     </div>
                     <ul class="sidebar-social-list">
@@ -255,7 +283,7 @@ $info = $info->get_all_info();
                 </div>
                 <div class="col-lg-3 col-sm-3 col-6">
                     <div class="single-footer-widget">
-                        <h3>حودا ديزين</h3>
+                        <h3>ياسيلكو</h3>
                         <ul class="footer-links-list">
                             <li><a href="/portfolio"> اعمالنا</a></li>
                             <li><a href="marketing"> التسويق </a></li>
@@ -328,7 +356,7 @@ $info = $info->get_all_info();
             <div class="container">
                 <div class="copyright-area-content">
                     <p>
-                        حقوق النشر © 2024 جميع الحقوق محفوظة <a href="#">حودا ديزين</a>
+                        حقوق النشر © 2024 جميع الحقوق محفوظة <a href="#">ياسيلكو</a>
                     </p>
                 </div>
             </div>
