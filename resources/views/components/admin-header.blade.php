@@ -209,7 +209,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/marketers" class="nav-link">
+                    <a href="/partners" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             Partners Sections 
@@ -217,7 +217,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/new-marketer" class="nav-link">
+                    <a href="/new-partner" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             New partners Section

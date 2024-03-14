@@ -93,6 +93,14 @@ class Sections extends Controller
             'partners_body' => $marketers_partner->get_all()
         ]);
     }
+    public function faq(Request $request)
+    {
+        return view('index.faq');
+    }
+    public function terms_of_service(Request $request)
+    {
+        return view('index.terms-of-service');
+    }
     public function get_products(Request $request)
     {
         $product = new Product;

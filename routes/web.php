@@ -2,6 +2,7 @@
 
 use App\Models\Info;
 use App\Models\Contact;
+use App\Models\Marketers_partner;
 use App\Models\Product;
 use App\Models\Section;
 use App\Models\Category;
@@ -30,6 +31,8 @@ Route::get('/portfolio', [Sections::class, 'get_products']);
 Route::get('/contact', [Sections::class, 'contact']);
 Route::post('/contact', [Sections::class, 'new_contact']);
 Route::get('/marketing', [Sections::class, 'marketing']);
+Route::get('/faq', [Sections::class, 'faq']);
+Route::get('/terms-of-service', [Sections::class, 'terms_of_service']);
 
 
 Route::get('/dashboard', function () {
@@ -91,10 +94,31 @@ Route::get('/marketers', function () {
             'num_sections' => $num_sections,
             'num_products' => $num_products,
             'num_contacts' => $num_contacts,
-            'marketers'    =>$marketers->get_marketers()
+            'marketers' => $marketers->get_marketers()
         ]
     );
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/partners', function () {
+
+    $section = new Section;
+    $product = new Product;
+    $contact = new Contact;
+    $marketers = new Marketers_partner;
+    $num_sections = ($section->get_total_sections()->stats);
+    $num_products = ($product->get_total_products()->stats);
+    $num_contacts = ($contact->number_contacts()->stats);
+    return view(
+        'partners',
+        [
+            'num_sections' => $num_sections,
+            'num_products' => $num_products,
+            'num_contacts' => $num_contacts,
+            'marketers' => $marketers->get_all()
+        ]
+    );
+})->middleware(['auth', 'verified'])->name('dashboard');
+
 Route::get('/contact-info', function () {
 
     $section = new Section;
@@ -112,7 +136,7 @@ Route::get('/contact-info', function () {
             'num_sections' => $num_sections,
             'num_products' => $num_products,
             'num_contacts' => $num_contacts,
-            'sections'    =>$info->get_all_info()
+            'sections' => $info->get_all_info()
         ]
     );
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -134,7 +158,7 @@ Route::get('/information', function (Request $request) {
             'num_sections' => $num_sections,
             'num_products' => $num_products,
             'num_contacts' => $num_contacts,
-            'section'    =>$info::where('id', $request->id)->first()
+            'section' => $info::where('id', $request->id)->first()
         ]
     );
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -149,7 +173,7 @@ Route::post('/information', function (Request $request) {
     $num_products = ($product->get_total_products()->stats);
     $num_contacts = ($contact->number_contacts()->stats);
     $info = new Info;
-    $info2 =$info::where('id', $request->id)->first();
+    $info2 = $info::where('id', $request->id)->first();
     $info2->value = $request->value;
     $info2->update();
     return view(
@@ -158,7 +182,7 @@ Route::post('/information', function (Request $request) {
             'num_sections' => $num_sections,
             'num_products' => $num_products,
             'num_contacts' => $num_contacts,
-            'section'    => $info2
+            'section' => $info2
         ]
     );
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -179,7 +203,7 @@ Route::get('/new-marketer', function () {
             'num_sections' => $num_sections,
             'num_products' => $num_products,
             'num_contacts' => $num_contacts,
-            'marketers'    =>$marketers->get_marketers()
+            'marketers' => $marketers->get_marketers()
         ]
     );
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -205,7 +229,7 @@ Route::post('/new-marketer', function (Request $request) {
             'num_sections' => $num_sections,
             'num_products' => $num_products,
             'num_contacts' => $num_contacts,
-            'marketers'    =>$marketers->get_marketers()
+            'marketers' => $marketers->get_marketers()
         ]
     );
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -227,7 +251,7 @@ Route::get('/marketer', function (Request $request) {
             'num_sections' => $num_sections,
             'num_products' => $num_products,
             'num_contacts' => $num_contacts,
-            'section'    =>$marketer
+            'section' => $marketer
         ]
     );
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -256,7 +280,7 @@ Route::post('/marketer', function (Request $request) {
             'num_sections' => $num_sections,
             'num_products' => $num_products,
             'num_contacts' => $num_contacts,
-            'section'    =>$marketer
+            'section' => $marketer
         ]
     );
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -431,6 +455,51 @@ Route::post('/category', function (Request $request) {
     );
 })->middleware(['auth', 'verified']);
 
+Route::post('/partner', function (Request $request) {
+
+    $section = new Section;
+    $product = new Product;
+    $contact = new Category;
+    $mark_partner = new Marketers_partner;
+    $num_sections = ($section->get_total_sections()->stats);
+    $num_products = ($product->get_total_products()->stats);
+
+    $sections = $mark_partner::where('id', $request->id)->first();
+    $sections->head = $request->head;
+    $sections->highlighted = $request->highlighted;
+    $sections->body = $request->body;
+    $sections->update();
+
+    return view(
+        'partner',
+        [
+            'num_sections' => $num_sections,
+            'num_products' => $num_products,
+            'section' => $sections
+        ]
+    );
+})->middleware(['auth', 'verified']);
+
+Route::get('/partner', function (Request $request) {
+
+    $section = new Section;
+    $product = new Product;
+    $contact = new Category;
+    $mark_partner = new Marketers_partner;
+    $num_sections = ($section->get_total_sections()->stats);
+    $num_products = ($product->get_total_products()->stats);
+
+    $sections = $mark_partner::where('id', $request->id)->first();
+    return view(
+        'partner',
+        [
+            'num_sections' => $num_sections,
+            'num_products' => $num_products,
+            'section' => $sections
+        ]
+    );
+})->middleware(['auth', 'verified']);
+
 Route::get('/section', function (Request $request) {
 
     $section = new Section;
@@ -464,6 +533,59 @@ Route::get('/new-product', function (Request $request) {
     $section = $section->get_section($request->id);
     return view(
         'newproduct',
+        [
+            'num_sections' => $num_sections,
+            'num_products' => $num_products,
+            'num_contacts' => $num_contacts,
+            'section' => $section
+        ]
+    );
+})->middleware(['auth', 'verified']);
+
+
+Route::get('/new-partner', function (Request $request) {
+
+    $section = new Section;
+    $product = new Product;
+    $contact = new Contact;
+    $num_sections = ($section->get_total_sections()->stats);
+    $num_products = ($product->get_total_products()->stats);
+    $num_contacts = ($contact->number_contacts()->stats);
+
+    $section = $section->get_section($request->id);
+    return view(
+        'newpartner',
+        [
+            'num_sections' => $num_sections,
+            'num_products' => $num_products,
+            'num_contacts' => $num_contacts,
+            'section' => $section
+        ]
+    );
+})->middleware(['auth', 'verified']);
+
+Route::post('/new-partner', function (Request $request) {
+
+    $section = new Section;
+    $product = new Product;
+    $contact = new Contact;
+    $marketer_partner = new Marketers_partner;
+    $num_sections = ($section->get_total_sections()->stats);
+    $num_products = ($product->get_total_products()->stats);
+    $num_contacts = ($contact->number_contacts()->stats);
+
+    $section = $section->get_section($request->id);
+
+    $photo = $request->file('image');
+    $path = $photo->storeAs('uploads', $photo->getClientOriginalName(), 'public'); // Assuming 'uploads' is the desired directory within 'public'
+
+    $marketer_partner->head = $request->head;
+    $marketer_partner->highlighted = $request->highlighted;
+    $marketer_partner->body = $request->body;
+    $marketer_partner->image = $photo->getClientOriginalName();
+    $marketer_partner->save();
+    return view(
+        'newpartner',
         [
             'num_sections' => $num_sections,
             'num_products' => $num_products,

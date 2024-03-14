@@ -57,7 +57,7 @@ $info = $info->get_all_info();
             <div class="container">
                 <div class="main-responsive-menu">
                     <div class="logo">
-                        <a href="index.php">
+                        <a href="/">
                             <img src="7odaa-com/assets/images/logo.svg">
                         </a>
                     </div>
@@ -68,7 +68,7 @@ $info = $info->get_all_info();
         <div class="main-navbar">
             <div class="container">
                 <nav class="navbar navbar-expand-md navbar-light">
-                    <a class="navbar-brand" href="index.php">
+                    <a class="navbar-brand" href="/">
                         <img src="7odaa-com/assets/images/logo.svg">
                     </a>
                     <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
@@ -92,13 +92,13 @@ $info = $info->get_all_info();
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li class="nav-item">
-                                        <a href="faq.php" class="nav-link"> الاسئلة الشائعة </a>
+                                        <a href="faq" class="nav-link"> الاسئلة الشائعة </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="offers.php" class="nav-link"> العروض </a>
+                                        <a href="offers" class="nav-link"> العروض </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="terms-of-service.php" class="nav-link"> الشروط والاحكام </a>
+                                        <a href="terms-of-service" class="nav-link"> الشروط والاحكام </a>
                                     </li>
                                 </ul>
                             </li>
@@ -146,7 +146,7 @@ $info = $info->get_all_info();
                     <div class="option-inner">
                         <div class="others-options d-flex align-items-center">
                             <div class="option-item">
-                                <a href="contact.php" class="default-btn"> file.contactUS <i
+                                <a href="contact" class="default-btn"> file.contactUS <i
                                         class="ri-message-line"></i><span></span></a>
                             </div>
                             <div class="option-item">
@@ -167,7 +167,7 @@ $info = $info->get_all_info();
                 <button type="button" class="close" data-bs-dismiss="modal"><i class="ri-close-line"></i></button>
                 <div class="modal-body">
                     <div class="title">
-                        <a href="index.php">
+                        <a href="index">
                             <img src="7odaa-com/assets/images/logo.svg">
                         </a>
                     </div>
@@ -240,7 +240,7 @@ $info = $info->get_all_info();
                 <div class="col-lg-3 col-sm-6">
                     <div class="single-footer-widget">
                         <div class="widget-logo">
-                            <a href="index.php">
+                            <a href="/">
                                 <img src="7odaa-com/assets/images/logo.svg">
                             </a>
                         </div>
