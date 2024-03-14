@@ -73,7 +73,7 @@
                                 <a href="/portfolio" class="nav-link">اعمالنا</a>
                             </li>
                             <li class="nav-item">
-                                <a href="marketing.php" class="nav-link">التسويق</a>
+                                <a href="marketing" class="nav-link">التسويق</a>
                             </li>
                             <li class="nav-item">
                                 <a href="/contact" class="nav-link">تواصل معنا</a>
@@ -112,7 +112,7 @@
                           </div>
                         </div> -->
                             <div class="option-item">
-                                <a href="contact.php" class="default-btn"> تواصل معنا <i
+                                <a href="contact" class="default-btn"> تواصل معنا <i
                                         class="ri-message-line"></i><span></span></a>
                             </div>
                             <div class="option-item">
@@ -235,7 +235,7 @@
                         <h3>حودا ديزين</h3>
                         <ul class="footer-links-list">
                             <li><a href="/portfolio"> اعمالنا</a></li>
-                            <li><a href="marketing.php"> التسويق </a></li>
+                            <li><a href="marketing"> التسويق </a></li>
                             <li><a href="offers.php"> العروض </a></li>
                             <li><a href="web.php"> برمجة وتصميم المواقع الإلكترونية </a></li>
                             <li><a href="terms-of-service.php">الشروط والاحكام</a></li>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Sections;
+use App\Models\Category;
 use App\Models\Contact;
 use App\Models\Product;
 use App\Models\ProductCategory;
@@ -26,6 +27,7 @@ Route::get('/', [Sections::class, 'index']);
 Route::get('/portfolio', [Sections::class, 'get_products']);
 Route::get('/contact', [Sections::class, 'contact']);
 Route::post('/contact', [Sections::class, 'new_contact']);
+Route::get('/marketing', [Sections::class, 'marketing']);
 
 
 Route::get('/dashboard', function () {
@@ -74,7 +76,7 @@ Route::get('/sections', function (Request $request) {
             'sections' => $sections
         ]
     );
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified']);
 
 
 Route::get('/products', function (Request $request) {
@@ -98,7 +100,31 @@ Route::get('/products', function (Request $request) {
             'sections' => $sections
         ]
     );
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified']);
+
+Route::get('/categories', function (Request $request) {
+
+    $section = new Section;
+    $product = new Product;
+    $contact = new Contact;
+    $category = new Category;
+    $num_sections = ($section->get_total_sections()->stats);
+    $num_products = ($product->get_total_products()->stats);
+    $num_contacts = ($contact->number_contacts()->stats);
+
+    $sections = $category->get();
+
+    return view(
+        'categories',
+        [
+            'num_sections' => $num_sections,
+            'num_products' => $num_products,
+            'num_contacts' => $num_contacts,
+            'sections' => $sections
+        ]
+    );
+})->middleware(['auth', 'verified']);
+
 Route::get('/product', function (Request $request) {
 
     $section = new Section;
@@ -110,7 +136,6 @@ Route::get('/product', function (Request $request) {
 
     $sections = $product->where('id', $request->id)->first();
 
-
     return view(
         'product',
         [
@@ -120,7 +145,84 @@ Route::get('/product', function (Request $request) {
             'section' => $sections
         ]
     );
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified']);
+Route::post('/product', function (Request $request) {
+
+    $section = new Section;
+    $product = new Product;
+    $contact = new Contact;
+    $num_sections = ($section->get_total_sections()->stats);
+    $num_products = ($product->get_total_products()->stats);
+    $num_contacts = ($contact->number_contacts()->stats);
+
+    $sections = $product::where('id', $request->id)->first();
+
+    $photo = $request->file('image');
+    if ($photo) {
+
+        $path = $photo->storeAs('uploads', $photo->getClientOriginalName(), 'public'); // Assuming 'uploads' is the desired directory within 'public'
+        $sections->img = $photo->getClientOriginalName();
+    }
+
+    $sections->header = $request->title;
+    $sections->body = $request->body;
+    $sections->link = $request->link;
+    $sections->price = $request->price;
+    $sections->save();
+    return view(
+        'product',
+        [
+            'num_sections' => $num_sections,
+            'num_products' => $num_products,
+            'num_contacts' => $num_contacts,
+            'section' => $sections
+        ]
+    );
+})->middleware(['auth', 'verified']);
+
+Route::get('/category', function (Request $request) {
+
+    $section = new Section;
+    $product = new Product;
+    $contact = new Category;
+    $num_sections = ($section->get_total_sections()->stats);
+    $num_products = ($product->get_total_products()->stats);
+
+    $sections = $contact::where('id', $request->id)->first();
+
+
+    return view(
+        'category',
+        [
+            'num_sections' => $num_sections,
+            'num_products' => $num_products,
+            'section' => $sections
+        ]
+    );
+})->middleware(['auth', 'verified']);
+
+Route::post('/category', function (Request $request) {
+
+    $section = new Section;
+    $product = new Product;
+    $contact = new Category;
+    $num_sections = ($section->get_total_sections()->stats);
+    $num_products = ($product->get_total_products()->stats);
+
+    $sections = $contact::where('id', $request->id)->first();
+    $sections->name = $request->name;
+    $sections->cat_id = $request->cat_id;
+
+    $sections->save();
+    return view(
+        'category',
+        [
+            'num_sections' => $num_sections,
+            'num_products' => $num_products,
+            'section' => $sections
+        ]
+    );
+})->middleware(['auth', 'verified']);
 
 Route::get('/section', function (Request $request) {
 
@@ -141,7 +243,7 @@ Route::get('/section', function (Request $request) {
             'section' => $section
         ]
     );
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified']);
 
 Route::get('/new-product', function (Request $request) {
 
@@ -162,7 +264,7 @@ Route::get('/new-product', function (Request $request) {
             'section' => $section
         ]
     );
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified']);
 
 Route::post('/new-product', function (Request $request) {
 
@@ -198,7 +300,7 @@ Route::post('/new-product', function (Request $request) {
             'section' => $section
         ]
     );
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified']);
 
 Route::post('/section', function (Request $request) {
 
@@ -224,7 +326,7 @@ Route::post('/section', function (Request $request) {
             'section' => $section
         ]
     );
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified']);
 
 
 Route::middleware('auth')->group(function () {

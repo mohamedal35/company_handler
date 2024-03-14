@@ -52,25 +52,15 @@
                                 <div class="form-group">
                                     <label for="inputName">Header</label>
                                     <input type="text" id="inputName" class="form-control"
-                                        value="{{ $section->header }}" name="title">
+                                        value="{{ $section->name }}" name="name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputName">Category ID</label>
+                                    <input type="text" id="inputName" class="form-control"
+                                        value="{{ $section->cat_id }}" name="cat_id">
                                 </div>
 
 
-                                <div class="form-group">
-                                    <label for="inputClientCompany">Body</label>
-                                    <input type="text" id="inputClientCompany" class="form-control"
-                                        value="{{ $section->body }}" name="body">
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputClientCompany">Link</label>
-                                    <input type="text" id="inputClientCompany" class="form-control"
-                                        value="{{ $section->link }}" name="link">
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputClientCompany">Price</label>
-                                    <input type="text" id="inputClientCompany" class="form-control"
-                                        value="{{ $section->price }}" name="price">
-                                </div>
 
                             </div>
                             <!-- /.card-body -->
