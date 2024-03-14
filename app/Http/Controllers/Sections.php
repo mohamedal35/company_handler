@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Contact;
 use App\Models\Info;
 use App\Models\Marketer;
+use App\Models\Marketers_partner;
 use App\Models\Product;
 use App\Models\Section;
 use App\Models\Category;
@@ -82,13 +83,14 @@ class Sections extends Controller
             // print_r($placeholders_aray);
             $partners_html .= ($value['template']);
         }
-
+        $marketers_partner= new Marketers_partner;
         return view('index.marketing', [
             'sections_html' => $sections_html,
             'info' => $info->get_all_info(),
             'marketer_headers' => $marketer_html,
             'marketers' => $marketer->get_marketers(),
-            'partners_header' => $partners_html
+            'partners_header' => $partners_html,
+            'partners_body' => $marketers_partner->get_all()
         ]);
     }
     public function get_products(Request $request)

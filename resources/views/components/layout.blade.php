@@ -1,3 +1,10 @@
+<?php 
+
+use App\Models\Info;
+
+$info = new Info;
+$info = $info->get_all_info();
+?>
 <!doctype html>
 <html>
 <!-- # +----------------------------------------------------------------------------+
@@ -213,19 +220,35 @@
                         <ul class="widget-info">
                             <li>
                                 <i class="ri-customer-service-line"></i>
-                                <a href="tel:00201111202057">00201111202057</a>
+                                <a href="tel:00201111202057">@foreach ($info as $item)
+                                    @php
+                                        if ($item->key == 'phone_1') echo $item->value;
+                                    @endphp
+                                @endforeach</a>
                             </li>
                             <li>
                                 <i class="ri-customer-service-line"></i>
-                                <a href="tel:00966566366464">00966566366464</a>
+                                <a href="tel:00966566366464">@foreach ($info as $item)
+                                    @php
+                                        if ($item->key == 'phone_2') echo $item->value;
+                                    @endphp
+                                @endforeach</a>
                             </li>
                             <li>
                                 <i class="ri-global-line"></i>
-                                <a href="mailto:info@7odaa.com"><span>info@7odaa.com</span></a>
+                                <a href="mailto:info@7odaa.com"><span>@foreach ($info as $item)
+                                    @php
+                                        if ($item->key == 'email') echo $item->value;
+                                    @endphp
+                                @endforeach</span></a>
                             </li>
                             <li>
                                 <i class="ri-map-pin-line"></i>
-                                جمهورية مصر العربيه - المملكه العربية السعودية
+                                @foreach ($info as $item)
+                                @php
+                                    if ($item->key == 'location') echo $item->value;
+                                @endphp
+                            @endforeach
                             </li>
                         </ul>
                     </div>
@@ -236,10 +259,10 @@
                         <ul class="footer-links-list">
                             <li><a href="/portfolio"> اعمالنا</a></li>
                             <li><a href="marketing"> التسويق </a></li>
-                            <li><a href="offers.php"> العروض </a></li>
-                            <li><a href="web.php"> برمجة وتصميم المواقع الإلكترونية </a></li>
-                            <li><a href="terms-of-service.php">الشروط والاحكام</a></li>
-                            <li><a href="contact.php"> تواصل معنا </a></li>
+                            <li><a href="offers"> العروض </a></li>
+                            <li><a href="web"> برمجة وتصميم المواقع الإلكترونية </a></li>
+                            <li><a href="terms-of-service">الشروط والاحكام</a></li>
+                            <li><a href="contact"> تواصل معنا </a></li>
                         </ul>
                     </div>
                 </div>
@@ -266,20 +289,32 @@
 
                         <ul class="widget-social">
                             <li>
-                                <a href="https://www.facebook.com/7odaa90" target="_blank">
+                                <a href="@foreach ($info as $item)
+                                @php
+                                    if ($item->key == 'facebook') echo $item->value;
+                                @endphp
+                            @endforeach" target="_blank">
                                     <i class="ri-facebook-line me-2"></i>
                                     فيسبوك
                                 </a>
                             </li>
 
                             <li>
-                                <a href="http://wa.me/00201111202057" target="_blank">
+                                <a href="@foreach ($info as $item)
+                                @php
+                                    if ($item->key == 'whatsapp') echo $item->value;
+                                @endphp
+                            @endforeach" target="_blank">
                                     <i class="ri-whatsapp-line me-2"></i>
                                     واتساب
                                 </a>
                             </li>
                             <li>
-                                <a href="http://wa.me/00966566366464" target="_blank">
+                                <a href="@foreach ($info as $item)
+                                @php
+                                    if ($item->key == 'whatsapp2') echo $item->value;
+                                @endphp
+                            @endforeach" target="_blank">
                                     <i class="ri-whatsapp-line me-2"></i>
                                     واتساب
                                 </a>

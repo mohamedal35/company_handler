@@ -95,36 +95,64 @@
                         <ul class="address-info">
                             <li>
                                 <i class="ri-customer-service-line"></i>
-                                <a href="tel:+200201111202057">1412413</a>
+                                <a href="tel:+200201111202057">@foreach ($info as $item)
+                                    @php
+                                        if ($item->key == 'phone_1') echo $item->value;
+                                    @endphp
+                                @endforeach</a>
                             </li>
                             <li>
                                 <i class="ri-customer-service-line"></i>
-                                <a href="tel:00966566366464">00966566366464</a>
+                                <a href="tel:00966566366464">@foreach ($info as $item)
+                                    @php
+                                        if ($item->key == 'phone_2') echo $item->value;
+                                    @endphp
+                                @endforeach</a>
                             </li>
                             <li>
                                 <i class="ri-global-line"></i>
-                                <a href="mailto:info@7odaa.com"><span>info@7odaa.com</span></a>
+                                <a href="mailto:info@7odaa.com"><span>@foreach ($info as $item)
+                                    @php
+                                        if ($item->key == 'email') echo $item->value;
+                                    @endphp
+                                @endforeach</span></a>
                             </li>
                             <li>
                                 <i class="ri-map-pin-line"></i>
-                                جمهورية مصر العربيه - المملكه العربية السعودية
+                                @foreach ($info as $item)
+                                    @php
+                                        if ($item->key == 'location') echo $item->value;
+                                    @endphp
+                                @endforeach
                             </li>
                         </ul>
                         <ul class="address-social">
                             <li>
-                                <a href="https://www.facebook.com/7odaa90" target="_blank">
+                                <a href="@foreach ($info as $item)
+                                @php
+                                    if ($item->key == 'facebook') echo $item->value;
+                                @endphp
+                            @endforeach" target="_blank">
                                     <i class="ri-facebook-line"></i>
                                 </a>
                             </li>
 
 
                             <li>
-                                <a href="https://api.whatsapp.com/send?phone=00200966566366464" target="_blank">
+                                <a href="@foreach ($info as $item)
+                                @php
+                                    if ($item->key == 'whatsapp') echo $item->value;
+                                @endphp
+                            @endforeach" target="_blank">
                                     <i class="ri-messenger-line"></i>
                                 </a>
                             </li>
                             <li>
-                                <a href="https://api.whatsapp.com/send?phone=00200201111202057" target="_blank">
+                                <a href="@foreach ($info as $item)
+                                @php
+                                    if ($item->key == 'whatsapp2') echo $item->value;
+                                @endphp
+                            @endforeach" target="_blank">
                                     <i class="ri-messenger-line"></i>
                                 </a>
                             </li>
